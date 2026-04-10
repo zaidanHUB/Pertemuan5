@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tugas Algoritma</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a, #3b82f6);
+    min-height: 100vh;
+    padding: 25px;
+    color: white;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.container {
+    display: grid;
+    gap: 25px;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+button {
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.output {
+    margin-top: 15px;
+    background: rgba(255,255,255,0.15);
+    padding: 12px;
+    border-radius: 10px;
+    white-space: pre-line;
+}
+
+pre {
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+code {
+    color: #93c5fd;
+}
+
+input {
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: none;
+    width: 100%;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+    <h1>Tugas Algoritma</h1>
+    <p>Ommar Zaidan Ahmad | 251011700963</p>
+</div>
+
+<div class="container">
+
+<!-- TUGAS 1 -->
+<div class="card">
+    <h2>Analisis Nilai</h2>
+    <button onclick="analisis()">Tampilkan Hasil</button>
+    <div class="output" id="hasilNilai"></div>
+
+<h3>Kode Python:</h3>
+<pre><code>
+# ======================
+# TUGAS 1 - ANALISIS NILAI MAHASISWA
+# ======================
+
+mahasiswa = {
+    "Rizky": [50, 70, 40, 80],
+    "Nadia": [78, 78, 80, 65],
+    "Fahmi": [57, 88, 67, 69]
+}
+
+def analisis_nilai(data):
+    for nama, nilai in data.items():
+        rata_rata = sum(nilai) / len(nilai)
+        nilai_terkecil = min(nilai)
+        nilai_terbesar = max(nilai)
+
+        print("Nama            :", nama)
+        print("Nilai           :", nilai)
+        print("Rata-rata       :", round(rata_rata, 2))
+        print("Nilai terkecil  :", nilai_terkecil)
+        print("Nilai terbesar  :", nilai_terbesar)
+        print("-" * 30)
+
+# Jalankan program
+if __name__ == "__main__":
+    analisis_nilai(mahasiswa)
+</code></pre>
+</div>
+
+<!-- TUGAS 2 -->
+<div class="card">
+    <h2>Operasi Matriks</h2>
+
+    <input type="number" id="baris" placeholder="Jumlah baris">
+    <input type="number" id="kolom" placeholder="Jumlah kolom">
+
+    <button onclick="buatMatriks()">Buat Matriks</button>
+
+    <div id="inputMatriks"></div>
+
+    <button onclick="hitung('tambah')">Tambah</button>
+    <button onclick="hitung('kurang')">Kurang</button>
+    <button onclick="hitung('kali')">Kali</button>
+
+    <div class="output" id="hasilMatriks"></div>
+
+<h3>Kode Python:</h3>
+<pre><code>
+<pre><code>
+# ======================
+# TUGAS 2 - OPERASI MATRIKS
+# ======================
+
+def input_matriks(baris, kolom, nama):
+    print(f"\nMasukkan Matriks {nama}:")
+    matriks = []
+    for i in range(baris):
+        row = list(map(int, input(f"Baris {i+1}: ").split()))
+        matriks.append(row)
+    return matriks
+
+def penjumlahan(A, B):
+    return [[A[i][j] + B[i][j] for j in range(len(A[0]))] for i in range(len(A))]
+
+def pengurangan(A, B):
+    return [[A[i][j] - B[i][j] for j in range(len(A[0]))] for i in range(len(A))]
+
+def perkalian(A, B):
+    hasil = []
+    for i in range(len(A)):
+        row = []
+        for j in range(len(B[0])):
+            total = 0
+            for k in range(len(A[0])):
+                total += A[i][k] * B[k][j]
+            row.append(total)
+        hasil.append(row)
+    return hasil
+
+def tampilkan(matriks, judul):
+    print("\n", judul)
+    for row in matriks:
+        print(row)
+
+# Program utama
+if __name__ == "__main__":
+    baris = int(input("Masukkan jumlah baris: "))
+    kolom = int(input("Masukkan jumlah kolom: "))
+
+    A = input_matriks(baris, kolom, "A")
+    B = input_matriks(baris, kolom, "B")
+
+    tampilkan(penjumlahan(A, B), "Hasil Penjumlahan")
+    tampilkan(pengurangan(A, B), "Hasil Pengurangan")
+
+    if len(A[0]) == len(B):
+        tampilkan(perkalian(A, B), "Hasil Perkalian")
+    else:
+        print("Perkalian tidak bisa dilakukan (dimensi tidak sesuai)")
+</code></pre>
+</div>
+
+</div>
+
+<script>
+// ======================
+// TUGAS 1 (SUDAH SAMA DENGAN PYTHON)
+// ======================
+function analisis() {
+    let mahasiswa = {
+        "Rizky": [50, 70, 40, 80],
+        "Nadia": [78, 78, 80, 65],
+        "Fahmi": [57, 88, 67, 69]
+    };
+
+    let hasil = "";
+
+    for (let nama in mahasiswa) {
+        let nilai = mahasiswa[nama];
+        let avg = nilai.reduce((a,b)=>a+b) / nilai.length;
+        let min = Math.min(...nilai);
+        let max = Math.max(...nilai);
+
+        hasil += `Nama: ${nama}\n`;
+        hasil += `Nilai: ${nilai}\n`;
+        hasil += `Rata-rata: ${avg.toFixed(2)}\n`;
+        hasil += `Nilai terkecil: ${min}\n`;
+        hasil += `Nilai terbesar: ${max}\n\n`;
+    }
+
+    document.getElementById("hasilNilai").innerText = hasil;
+}
+
+// ======================
+// TUGAS 2
+// ======================
+function buatMatriks() {
+    let baris = document.getElementById("baris").value;
+    let kolom = document.getElementById("kolom").value;
+
+    let html = "<h3>Matriks A</h3>";
+    for (let i=0;i<baris;i++){
+        for (let j=0;j<kolom;j++){
+            html += `<input type="number" id="A${i}${j}" style="width:60px">`;
+        }
+        html += "<br>";
+    }
+
+    html += "<h3>Matriks B</h3>";
+    for (let i=0;i<baris;i++){
+        for (let j=0;j<kolom;j++){
+            html += `<input type="number" id="B${i}${j}" style="width:60px">`;
+        }
+        html += "<br>";
+    }
+
+    document.getElementById("inputMatriks").innerHTML = html;
+}
+
+function getMatriks(prefix, baris, kolom){
+    let m = [];
+    for(let i=0;i<baris;i++){
+        let row = [];
+        for(let j=0;j<kolom;j++){
+            row.push(parseInt(document.getElementById(prefix+i+j).value) || 0);
+        }
+        m.push(row);
+    }
+    return m;
+}
+
+function hitung(type){
+    let baris = parseInt(document.getElementById("baris").value);
+    let kolom = parseInt(document.getElementById("kolom").value);
+
+    let A = getMatriks("A", baris, kolom);
+    let B = getMatriks("B", baris, kolom);
+
+    let hasil = [];
+
+    if(type === "tambah"){
+        for(let i=0;i<baris;i++){
+            hasil[i]=[];
+            for(let j=0;j<kolom;j++){
+                hasil[i][j] = A[i][j] + B[i][j];
+            }
+        }
+    }
+
+    else if(type === "kurang"){
+        for(let i=0;i<baris;i++){
+            hasil[i]=[];
+            for(let j=0;j<kolom;j++){
+                hasil[i][j] = A[i][j] - B[i][j];
+            }
+        }
+    }
+
+    else if(type === "kali"){
+        // VALIDASI
+        if (A[0].length !== B.length){
+            alert("Kolom A harus sama dengan baris B!");
+            return;
+        }
+
+        for(let i=0;i<baris;i++){
+            hasil[i]=[];
+            for(let j=0;j<B[0].length;j++){
+                let total = 0;
+                for(let k=0;k<A[0].length;k++){
+                    total += A[i][k] * B[k][j];
+                }
+                hasil[i][j] = total;
+            }
+        }
+    }
+
+    let output = "";
+    hasil.forEach(r => output += r.join(" ") + "\n");
+
+    document.getElementById("hasilMatriks").innerText = output;
+}
+</script>
+
+</body>
+</html>
